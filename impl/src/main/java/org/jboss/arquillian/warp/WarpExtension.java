@@ -20,6 +20,7 @@ import org.jboss.arquillian.container.test.impl.enricher.resource.URLResourcePro
 import org.jboss.arquillian.container.test.spi.client.deployment.ProtocolArchiveProcessor;
 import org.jboss.arquillian.core.spi.LoadableExtension;
 import org.jboss.arquillian.test.spi.enricher.resource.ResourceProvider;
+import org.jboss.arquillian.test.spi.enricher.resource.ResourceProviderWrapper;
 import org.jboss.arquillian.warp.client.filter.http.HttpFilterBuilder;
 import org.jboss.arquillian.warp.impl.client.commandBus.CommandBusObserver;
 import org.jboss.arquillian.warp.impl.client.commandBus.CommandServiceOnClient;
@@ -52,6 +53,7 @@ import org.jboss.arquillian.warp.impl.client.proxy.DefaultURLMapping;
 import org.jboss.arquillian.warp.impl.client.proxy.ProxyObserver;
 import org.jboss.arquillian.warp.impl.client.proxy.ProxyService;
 import org.jboss.arquillian.warp.impl.client.proxy.ProxyURLProvider;
+import org.jboss.arquillian.warp.impl.client.proxy.ProxyURLWrapper;
 import org.jboss.arquillian.warp.impl.client.proxy.ProxyUsageTracker;
 import org.jboss.arquillian.warp.impl.client.proxy.URLMapping;
 import org.jboss.arquillian.warp.impl.client.scope.WarpExecutionContextImpl;
@@ -74,6 +76,8 @@ public class WarpExtension implements LoadableExtension {
 
         // proxy
         builder.override(ResourceProvider.class, URLResourceProvider.class, ProxyURLProvider.class);
+        // register the proxy URL wrapper
+        builder.service(ResourceProviderWrapper.class, ProxyURLWrapper.class);
 
         // deployment enrichment
         builder.service(ProtocolArchiveProcessor.class, DeploymentEnricher.class);

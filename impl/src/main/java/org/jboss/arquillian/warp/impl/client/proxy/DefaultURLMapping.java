@@ -52,6 +52,12 @@ public class DefaultURLMapping implements URLMapping {
         return proxyUrl;
     }
 
+    @Override
+    public synchronized boolean isProxyURL(URL url) {
+        URL base = URLUtils.getUrlBase(url);
+        return map.containsValue(base);
+    }
+
     private int generatePort() {
         return BASE + sequenceNumber++;
     }

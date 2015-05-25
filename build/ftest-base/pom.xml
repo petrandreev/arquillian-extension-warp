@@ -146,9 +146,42 @@
         <!-- Containers -->
 
         <profile>
-            <id>wildfly-managed-8-0</id>
+            <id>wildfly-managed-8-2</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>integration</name>
+                    <value>wildfly82</value>
+                </property>
+            </activation>
+            <properties>
+                <arquillian.launch.jbossas71>true</arquillian.launch.jbossas71>
+                <arquillian.container.home>${project.build.directory}/wildfly-${version.wildfly82}</arquillian.container.home>
+                <arquillian.container.distribution>org.wildfly:wildfly-dist:zip:${version.wildfly82}</arquillian.container.distribution>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.wildfly</groupId>
+                    <artifactId>wildfly-arquillian-container-managed</artifactId>
+                    <version>${version.wildfly82}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>wildfly-remote-8-2</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.wildfly</groupId>
+                    <artifactId>wildfly-arquillian-container-remote</artifactId>
+                    <version>${version.wildfly82}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>wildfly-managed-8-0</id>
+            <activation>
                 <property>
                     <name>integration</name>
                     <value>wildfly80</value>

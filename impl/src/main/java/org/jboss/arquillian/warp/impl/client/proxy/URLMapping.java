@@ -34,4 +34,6 @@ public interface URLMapping {
      * </p>
      */
     URL getProxyURL(URL realUrl);
+
+    boolean isProxyURL(URL url);
 }
